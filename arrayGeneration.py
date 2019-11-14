@@ -1,14 +1,13 @@
-from Leaf import Leaf
-from Tree import Tree
-
 import numpy as np
+
+from BinarySpltter import BinarySplitter
+
 
 field_width = 30
 field_height = 30
 
 def createMap(n, m):
-    tree = Tree(n, m)
-    tree.visualize(field_width, field_height)
+    binary_splitting = BinarySplitter(n, m)
     array = np.zeros((n, m), dtype=bool)
     return array
 
