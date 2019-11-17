@@ -1,5 +1,7 @@
 import random
 
+from shapely.geometry import Polygon
+
 class Leaf():
     def __init__(self, width, height, x, y, min_size=3, max_size=6):
         # each space has a ccordinate of first point - (x, y)
@@ -10,6 +12,8 @@ class Leaf():
         self.height = height
         self.centre_x_lf, self.centre_y_lf = self.get_centre()
         self.centre_x_wf, self.centre_y_wf = self.get_x_y_of_centre()
+
+        self.poly = Polygon([(x, y), (x + width, y), (x + width, y + height), (x, y + height)])
 
         self.min_size = min_size
         self.max_size = max_size
@@ -52,3 +56,32 @@ class Leaf():
   
     def get_x_y_of_centre(self):
         return self.x + self.width // 2, self.y + self.height // 2
+
+    def make_bigger(self):
+        polygon = Polygon(self.poly)
+        points = list(polygon.exterior.coords)
+
+        points[0] = list(points[0])
+        points[1] = list(points[1])
+        points[2] = list(points[2])
+        points[3] = list(points[3])
+
+
+        points[0][0] += -0.5
+        points[0][1] += -0.5
+        points[1][0] += 0.5
+        points[1][1] += -0.5
+        points[2][0] += 0.5
+        points[2][1] += 0.5
+        points[3][0] += -0.5
+        points[3][1] += 0.5
+
+        points[0] = tuple(points[0])
+        points[1] = tuple(points[1])
+        points[2] = tuple(points[2])
+        points[3] = tuple(points[3])
+
+        points.remove(points[-1])
+
+        return Polygon(points)
+
