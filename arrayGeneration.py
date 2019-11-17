@@ -15,7 +15,7 @@ def createMap(n, m):
 def main():
     # size of field n x m
     createMap(field_width, field_height)
-
+    
 
 if __name__ == '__main__':
   main()
