@@ -17,9 +17,17 @@ def createMap(n, m):
 
     array = lines_to_array(tree.graph_to_lines(graph_), n, m)
     
-    tree.visualize_all(graph_, array, field_width, field_height)
-    
-    # visualize_lines(lines)
+    # tree.visualize_all(graph_, array, field_width, field_height)
+
+    plt.imshow(array, interpolation='none', cmap='gray')
+
+    plt.xlim(0, field_width)
+    plt.ylim(0, field_height)
+
+    plt.grid(True)
+
+    plt.show()
+
 
     return array
 
@@ -32,7 +40,7 @@ def lines_to_array(lines, n, m):
     for line in lines:
         x1, x2 = line[0][0], line[1][0] 
         y1, y2 = line[0][1], line[1][1] 
-        plt.plot([x1, x2], [y1, y2])
+        # plt.plot([x1, x2], [y1, y2])
 
         if x1 > x2:
             a = x2
@@ -48,14 +56,7 @@ def lines_to_array(lines, n, m):
             array[y1][i] = True
         for i in range(y1, y2 + 1):
             array[i][x2] = True
-
-    # plt.xlim(0, field_width)
-    # plt.ylim(0, field_height)
-
-    # plt.grid(True)
-
-    # plt.imshow(array, interpolation='none', cmap='gray')
-    # plt.show()
+        
     return array
 
 def visualize_lines(lines):
